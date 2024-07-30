@@ -8,7 +8,7 @@ from chainlit.element import ElementBased
 from loguru import logger
 from app.services import data_layer
 from app.services.asr_funasr import funasr
-from app.services.ollama import chat_with_ollama
+from app.services.ollama import chat_with_deepseek
 
 from app.utils import utils
 
@@ -67,7 +67,7 @@ async def on_chat_start():
             await msg.stream_token(content)
 
         await msg.stream_token("## 整理笔记\n\n")
-        await chat_with_ollama(messages, callback=on_message)
+        await chat_with_deepseek(messages, callback=on_message)
 
     asr_result = await transcribe_file(file)
     await summarize_notes(asr_result)
@@ -116,7 +116,7 @@ async def chat():
     async def on_message(content):
         await msg.stream_token(content)
 
-    await chat_with_ollama(messages, callback=on_message)
+    await chat_with_deepseek(messages, callback=on_message)
     await msg.send()
 
 
