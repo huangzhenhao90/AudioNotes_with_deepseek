@@ -1,6 +1,6 @@
 services:
   webui:
-    image: harryliu888/audio-notes
+    image: huangzhenhao90/AudioNotes_with_deepseek
     container_name: audio_notes_webui
     ports:
       - 15433:15433
@@ -23,6 +23,8 @@ services:
       - OLLAMA_BASE_URL=http://host.docker.internal:11434/v1
       - OLLAMA_MODEL=qwen2:7b
       - OLLAMA_API_KEY=ollama
+      # deepseek配置
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
     depends_on:
       - pg
     extra_hosts:
